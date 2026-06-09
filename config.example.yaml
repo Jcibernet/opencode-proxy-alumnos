@@ -1,0 +1,31 @@
+# Configuracion de CLIProxyAPI para alumnos.
+# Copia este archivo a config.yaml (lo hace setup.sh automaticamente).
+#
+# Esta config esta pensada para uso LOCAL con login web (OAuth). No necesitas
+# pegar API keys: tus credenciales se obtienen al iniciar sesion con login.sh
+# y se guardan en la carpeta auth-dir (~/.cli-proxy-api).
+
+# Puerto en el que escucha el proxy. opencode apunta a este puerto.
+port: 8317
+
+# Solo escuchar en localhost por seguridad (nadie en tu red puede usar tu cuenta).
+host: "127.0.0.1"
+
+# Carpeta donde se guardan tus credenciales OAuth.
+# IMPORTANTE: esta carpeta contiene tus tokens. Nunca la compartas ni la subas a git.
+auth-dir: "~/.cli-proxy-api"
+
+# Panel de administracion. Lo dejamos solo en localhost y sin clave por defecto.
+remote-management:
+  allow-remote: false
+  secret-key: ""
+
+# Reintentos automaticos ante errores temporales del upstream.
+request-retry: 3
+
+# Estrategia de balanceo cuando hay varias cuentas (round-robin por defecto).
+routing:
+  strategy: "round-robin"
+
+# Logging. Pon en true si necesitas depurar.
+debug: false

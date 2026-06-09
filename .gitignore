@@ -1,0 +1,21 @@
+# Binario descargado (cada alumno lo baja con setup.sh)
+/bin/
+
+# Config local generada (puede contener ajustes personales)
+/config.yaml
+/config.yaml.save
+
+# NUNCA subir credenciales OAuth
+.cli-proxy-api/
+auths/
+*.token
+*.key
+auth.v2.*
+
+# Logs
+*.log
+logs/
+
+# Sistema
+.DS_Store
+Thumbs.db
