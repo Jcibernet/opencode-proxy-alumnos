@@ -265,6 +265,59 @@ modelos. Si no aparece, usa `/models` y selecciona otro.
 
 ---
 
+## Manejar el esfuerzo: low / medium / high
+
+En opencode puedes ver algo como:
+
+```text
+GPT-5.5 OpenAI · high
+```
+
+Ese `high` es el **effort** o variante de razonamiento del modelo. No es una
+configuracion del proxy: lo maneja opencode al elegir el modelo.
+
+Para cambiarlo:
+
+1. Abre opencode.
+2. Escribe `/models`.
+3. Elige el modelo.
+4. Si opencode muestra variantes, elige `low`, `medium` o `high`.
+
+Uso recomendado:
+
+| Effort | Cuando usarlo |
+|---|---|
+| `low` | Preguntas simples, cambios chicos, mas rapido |
+| `medium` | Trabajo normal del curso |
+| `high` | Tareas dificiles, debugging complejo, arquitectura |
+
+Si un modelo no muestra `low/medium/high`, significa que ese modelo/proveedor no
+expone variantes de effort en opencode.
+
+Para fijarlo manualmente en una config avanzada de opencode, se puede usar
+`variant` por agente. Ejemplo:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "cliproxy/gpt-5.5",
+  "agent": {
+    "build": {
+      "model": "cliproxy/gpt-5.5",
+      "variant": "high"
+    },
+    "plan": {
+      "model": "cliproxy/gpt-5.5",
+      "variant": "high"
+    }
+  }
+}
+```
+
+Despues de cambiar `opencode.jsonc`, cierra y vuelve a abrir opencode.
+
+---
+
 ## Ver modelos reales disponibles
 
 Con el proxy corriendo, puedes listar lo que tu cuenta realmente tiene activo:
