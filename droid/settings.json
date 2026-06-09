@@ -4,47 +4,97 @@
   "showThinkingInMainView": true,
   "customModels": [
     {
-      "model": "claude-sonnet-4-5-20250929",
-      "id": "custom:Claude-Sonnet-4.5-(Subscription-via-Proxy)-0",
+      "model": "gpt-5.5",
+      "id": "custom:GPT-5.5-(Subscription-via-Proxy)-0",
       "index": 0,
       "baseUrl": "http://127.0.0.1:8317",
       "apiKey": "sk-dummy",
-      "displayName": "Claude Sonnet 4.5 (Subscription via Proxy)",
+      "displayName": "GPT-5.5 (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "openai"
+    },
+    {
+      "model": "gpt-5.4",
+      "id": "custom:GPT-5.4-(Subscription-via-Proxy)-1",
+      "index": 1,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "GPT-5.4 (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "openai"
+    },
+    {
+      "model": "gpt-5.3-codex",
+      "id": "custom:GPT-5.3-Codex-(Subscription-via-Proxy)-2",
+      "index": 2,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "GPT-5.3 Codex (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "openai"
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "id": "custom:GPT-5.4-Mini-(Subscription-via-Proxy)-3",
+      "index": 3,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "GPT-5.4 Mini (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "openai"
+    },
+    {
+      "model": "claude-opus-4-8",
+      "id": "custom:Claude-Opus-4.8-(Subscription-via-Proxy)-4",
+      "index": 4,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "Claude Opus 4.8 (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "anthropic"
+    },
+    {
+      "model": "claude-opus-4-7",
+      "id": "custom:Claude-Opus-4.7-(Subscription-via-Proxy)-5",
+      "index": 5,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "Claude Opus 4.7 (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "anthropic"
+    },
+    {
+      "model": "claude-opus-4-6",
+      "id": "custom:Claude-Opus-4.6-(Subscription-via-Proxy)-6",
+      "index": 6,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "Claude Opus 4.6 (Subscription via Proxy)",
+      "noImageSupport": false,
+      "provider": "anthropic"
+    },
+    {
+      "model": "claude-sonnet-4-6",
+      "id": "custom:Claude-Sonnet-4.6-(Subscription-via-Proxy)-7",
+      "index": 7,
+      "baseUrl": "http://127.0.0.1:8317",
+      "apiKey": "sk-dummy",
+      "displayName": "Claude Sonnet 4.6 (Subscription via Proxy)",
       "noImageSupport": false,
       "provider": "anthropic"
     },
     {
       "model": "claude-haiku-4-5-20251001",
-      "id": "custom:Claude-Haiku-4.5-(Subscription-via-Proxy)-1",
-      "index": 1,
+      "id": "custom:Claude-Haiku-4.5-(Subscription-via-Proxy)-8",
+      "index": 8,
       "baseUrl": "http://127.0.0.1:8317",
       "apiKey": "sk-dummy",
       "displayName": "Claude Haiku 4.5 (Subscription via Proxy)",
       "noImageSupport": false,
       "provider": "anthropic"
-    },
-    {
-      "model": "gpt-5-codex",
-      "id": "custom:GPT-5-Codex-(Subscription-via-Proxy)-2",
-      "index": 2,
-      "baseUrl": "http://127.0.0.1:8317",
-      "apiKey": "sk-dummy",
-      "displayName": "GPT-5 Codex (Subscription via Proxy)",
-      "noImageSupport": false,
-      "provider": "openai"
-    },
-    {
-      "model": "gpt-5",
-      "id": "custom:GPT-5-(Subscription-via-Proxy)-3",
-      "index": 3,
-      "baseUrl": "http://127.0.0.1:8317",
-      "apiKey": "sk-dummy",
-      "displayName": "GPT-5 (Subscription via Proxy)",
-      "noImageSupport": false,
-      "provider": "openai"
     }
   ],
   "sessionDefaultSettings": {
-    "model": "custom:Claude-Sonnet-4.5-(Subscription-via-Proxy)-0"
+    "model": "custom:GPT-5.5-(Subscription-via-Proxy)-0"
   }
 }

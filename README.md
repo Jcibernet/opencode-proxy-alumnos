@@ -1,127 +1,426 @@
 # opencode-proxy-alumnos
 
-Proxy local listo para usar **opencode** y **droid** con los principales modelos de
-**OpenAI (GPT / Codex)** y **Anthropic (Claude)** mediante **login web (OAuth)** con tu
-propia cuenta. No necesitas API keys: inicias sesion una vez en el navegador y listo.
+Repo listo para que alumnos usen **opencode** y **droid** con los principales
+modelos de **OpenAI** y **Anthropic** usando **login web (OAuth)**.
 
-Por debajo usa [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI), que levanta
-un servidor local compatible con OpenAI en `http://127.0.0.1:8317` y traduce las
-peticiones hacia Claude y GPT usando tu sesion.
+No se usan API keys. Cada alumno inicia sesion con su propia cuenta en el
+navegador y los tokens quedan guardados solo en su computadora.
+
+El proxy local corre en:
+
+```text
+http://127.0.0.1:8317
+```
 
 ---
 
 ## Agentes soportados
 
-Instala el agente que vayas a usar (puedes usar ambos):
+Instala el agente que quieras usar, en este orden recomendado:
 
-1. **opencode** -> https://opencode.ai/docs/  (instalacion: `curl -fsSL https://opencode.ai/install | bash`)
-2. **droid** (Factory) -> https://docs.factory.ai/  (instalacion: `curl -fsSL https://app.factory.ai/cli | sh`)
+1. **opencode**: https://opencode.ai/docs/
+
+   Instalacion rapida:
+
+   ```bash
+   curl -fsSL https://opencode.ai/install | bash
+   ```
+
+2. **droid** (Factory): https://docs.factory.ai/
+
+   Instalacion rapida:
+
+   ```bash
+   curl -fsSL https://app.factory.ai/cli | sh
+   ```
+
+Puedes instalar uno o los dos.
 
 ---
 
-## Requisitos
+## Idea simple
 
-- Linux, macOS o Windows (con Git Bash / WSL)
-- `curl` y `tar` (vienen por defecto en la mayoria de sistemas)
-- Un navegador para el login OAuth
-- Una cuenta de Anthropic (Claude) y/o de OpenAI (GPT/Codex)
+```text
+opencode / droid  ->  proxy local  ->  OpenAI o Anthropic
+                         8317          login web OAuth
+```
+
+- OpenAI se usa con login web: `./scripts/login.sh openai`
+- Anthropic se usa con login web: `./scripts/login.sh anthropic`
+- Puedes hacer ambos logins y despues elegir modelo con `/models` en opencode.
+- Tus tokens quedan en `~/.cli-proxy-api`. No compartas esa carpeta.
 
 ---
 
-## Instalacion rapida
+## Modelos configurados
+
+El modelo default del repo es:
+
+```text
+gpt-5.5
+```
+
+Si no lo tienes disponible, no pasa nada: en opencode escribe `/models` y elige
+el modelo que si aparezca para tu cuenta.
+
+### OpenAI
+
+Requiere:
 
 ```bash
-# 1) Clona este repo
-git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
-cd opencode-proxy-alumnos
-
-# 2) Descarga el binario del proxy y prepara la config
-./scripts/setup.sh
-
-# 3) Inicia sesion con tu cuenta (abre el navegador)
-./scripts/login.sh            # menu: 1) Anthropic  2) OpenAI
-# o directo:
-./scripts/login.sh anthropic
 ./scripts/login.sh openai
+```
 
-# 4) Arranca el proxy (dejalo corriendo en esta terminal)
+Modelos:
+
+| Modelo | Uso recomendado |
+|---|---|
+| `gpt-5.5` | Mejor modelo general, default del repo |
+| `gpt-5.4` | Alternativa general |
+| `gpt-5.3-codex` | Programacion / agentes de codigo |
+| `gpt-5.4-mini` | Rapido / liviano |
+
+### Anthropic
+
+Requiere:
+
+```bash
+./scripts/login.sh anthropic
+```
+
+Modelos:
+
+| Modelo | Uso recomendado |
+|---|---|
+| `claude-opus-4-8` | Mejor Claude disponible en esta config |
+| `claude-opus-4-7` | Opus fuerte |
+| `claude-opus-4-6` | Opus fuerte |
+| `claude-sonnet-4-6` | Balance velocidad/calidad |
+| `claude-haiku-4-5-20251001` | Rapido / small model |
+
+---
+
+## Instalacion para Windows
+
+Recomendado: usar **PowerShell**.
+
+1. Instala Git para Windows si no lo tienes: https://git-scm.com/download/win
+
+2. Abre PowerShell y clona el repo:
+
+   ```powershell
+   git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
+   cd opencode-proxy-alumnos
+   ```
+
+3. Descarga el proxy:
+
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+   ```
+
+4. Inicia sesion con OpenAI y/o Anthropic:
+
+   ```powershell
+   .\scripts\login.ps1 openai
+   .\scripts\login.ps1 anthropic
+   ```
+
+5. Instala la config del agente que vas a usar:
+
+   ```powershell
+   .\scripts\install-opencode-config.ps1
+   .\scripts\install-droid-config.ps1
+   ```
+
+6. Deja corriendo el proxy en una terminal:
+
+   ```powershell
+   .\scripts\proxy-start.ps1
+   ```
+
+7. En otra terminal abre el agente:
+
+   ```powershell
+   opencode
+   # o
+   droid
+   ```
+
+---
+
+## Instalacion para macOS
+
+1. Abre Terminal y clona el repo:
+
+   ```bash
+   git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
+   cd opencode-proxy-alumnos
+   ```
+
+2. Descarga el proxy:
+
+   ```bash
+   ./scripts/setup.sh
+   ```
+
+3. Inicia sesion con OpenAI y/o Anthropic:
+
+   ```bash
+   ./scripts/login.sh openai
+   ./scripts/login.sh anthropic
+   ```
+
+4. Instala la config del agente que vas a usar:
+
+   ```bash
+   ./scripts/install-opencode-config.sh
+   ./scripts/install-droid-config.sh
+   ```
+
+5. Deja corriendo el proxy en una terminal:
+
+   ```bash
+   ./scripts/proxy-start.sh
+   ```
+
+6. En otra terminal abre el agente:
+
+   ```bash
+   opencode
+   # o
+   droid
+   ```
+
+---
+
+## Instalacion para Ubuntu / Linux
+
+1. Instala herramientas basicas si faltan:
+
+   ```bash
+   sudo apt update
+   sudo apt install -y git curl tar
+   ```
+
+2. Clona el repo:
+
+   ```bash
+   git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
+   cd opencode-proxy-alumnos
+   ```
+
+3. Descarga el proxy:
+
+   ```bash
+   ./scripts/setup.sh
+   ```
+
+4. Inicia sesion con OpenAI y/o Anthropic:
+
+   ```bash
+   ./scripts/login.sh openai
+   ./scripts/login.sh anthropic
+   ```
+
+5. Instala la config del agente que vas a usar:
+
+   ```bash
+   ./scripts/install-opencode-config.sh
+   ./scripts/install-droid-config.sh
+   ```
+
+6. Deja corriendo el proxy en una terminal:
+
+   ```bash
+   ./scripts/proxy-start.sh
+   ```
+
+7. En otra terminal abre el agente:
+
+   ```bash
+   opencode
+   # o
+   droid
+   ```
+
+---
+
+## Elegir modelo en opencode
+
+Cuando abras opencode, escribe:
+
+```text
+/models
+```
+
+Elige el modelo que tengas disponible segun tu login:
+
+- Si hiciste login con OpenAI, elige `gpt-5.5`, `gpt-5.4`, `gpt-5.3-codex` o `gpt-5.4-mini`.
+- Si hiciste login con Anthropic, elige `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-4-6` o `claude-haiku-4-5-20251001`.
+- Si hiciste ambos logins, puedes cambiar entre OpenAI y Anthropic.
+
+El default es `gpt-5.5`, pero no todos los planes/cuentas muestran los mismos
+modelos. Si no aparece, usa `/models` y selecciona otro.
+
+---
+
+## Ver modelos reales disponibles
+
+Con el proxy corriendo, puedes listar lo que tu cuenta realmente tiene activo:
+
+### Windows
+
+```powershell
+.\scripts\list-models.ps1
+```
+
+### macOS / Ubuntu
+
+```bash
+./scripts/list-models.sh
+```
+
+Tambien puedes consultar directo:
+
+```bash
+curl http://127.0.0.1:8317/v1/models
+```
+
+---
+
+## Terminal 1 y Terminal 2
+
+Necesitas dos terminales:
+
+### Terminal 1
+
+Dejala abierta con el proxy corriendo:
+
+```bash
 ./scripts/proxy-start.sh
 ```
 
-Deja el proxy corriendo. En **otra terminal**, instala la config de tu agente:
+En Windows:
+
+```powershell
+.\scripts\proxy-start.ps1
+```
+
+### Terminal 2
+
+Abre el agente:
 
 ```bash
-# Para opencode:
-./scripts/install-opencode-config.sh
-
-# Para droid:
-./scripts/install-droid-config.sh
+opencode
+# o
+droid
 ```
 
-Luego abre tu agente:
-
-```bash
-opencode      # elige un modelo cliproxy/...
-droid         # elige un modelo "(Subscription via Proxy)"
-```
-
----
-
-## Como funciona
-
-```
-opencode / droid  ->  http://127.0.0.1:8317  (CLIProxyAPI)  ->  Anthropic / OpenAI
-                                  ^
-                          tu sesion OAuth
-                       (~/.cli-proxy-api)
-```
-
-- El proxy escucha **solo en localhost** (`127.0.0.1`), nadie en tu red lo usa.
-- Tus credenciales OAuth se guardan en `~/.cli-proxy-api` y **nunca** se suben a git.
-- `apiKey: "sk-dummy"` en las configs es un valor de relleno: el proxy ya tiene tu sesion.
+Si cierras la Terminal 1, el proxy se apaga y el agente deja de poder usar esos
+modelos.
 
 ---
 
 ## Scripts incluidos
 
-| Script | Que hace |
-|---|---|
-| `scripts/setup.sh` | Descarga el binario oficial de CLIProxyAPI y crea `config.yaml`. |
-| `scripts/login.sh` | Login web (OAuth) con Anthropic u OpenAI. |
-| `scripts/proxy-start.sh` | Arranca el proxy en `http://127.0.0.1:8317`. |
-| `scripts/install-opencode-config.sh` | Copia la config a `~/.config/opencode/opencode.jsonc`. |
-| `scripts/install-droid-config.sh` | Copia la config a `~/.factory/settings.json`. |
-
----
-
-## Modelos disponibles
-
-**Anthropic (Claude)** — requiere `./scripts/login.sh anthropic`
-- `claude-sonnet-4-5-20250929` (por defecto)
-- `claude-haiku-4-5-20251001`
-
-**OpenAI (GPT / Codex)** — requiere `./scripts/login.sh openai`
-- `gpt-5`
-- `gpt-5-codex`
-
-Puedes editar `opencode/opencode.jsonc` y `droid/settings.json` para anadir o
-cambiar modelos, y volver a ejecutar los scripts `install-*`.
+| Script | Windows | macOS/Linux | Que hace |
+|---|---|---|---|
+| Setup | `setup.ps1` | `setup.sh` | Descarga CLIProxyAPI y crea `config.yaml`. |
+| Login | `login.ps1` | `login.sh` | Login web con OpenAI o Anthropic. |
+| Proxy | `proxy-start.ps1` | `proxy-start.sh` | Arranca el proxy local en `8317`. |
+| opencode | `install-opencode-config.ps1` | `install-opencode-config.sh` | Instala config de opencode. |
+| droid | `install-droid-config.ps1` | `install-droid-config.sh` | Instala config de droid. |
+| Modelos | `list-models.ps1` | `list-models.sh` | Lista modelos reales del proxy. |
 
 ---
 
 ## Problemas comunes
 
-- **"No se encuentra el binario"**: corre `./scripts/setup.sh` primero.
-- **El agente no ve los modelos**: asegurate de que el proxy este corriendo
-  (`./scripts/proxy-start.sh`) y de haber instalado la config del agente.
-- **Error 401 / sin credenciales**: vuelve a iniciar sesion con `./scripts/login.sh`.
-- **Servidor sin navegador**: usa `./scripts/login.sh anthropic --no-browser` y abre
-  manualmente la URL que aparece en la terminal.
+### No aparece GPT-5.5
+
+Usa `/models` y elige otro modelo disponible. La disponibilidad depende de tu
+cuenta/plan de OpenAI.
+
+### Solo veo modelos de Anthropic
+
+Probablemente solo hiciste login con Anthropic. Ejecuta:
+
+```bash
+./scripts/login.sh openai
+```
+
+En Windows:
+
+```powershell
+.\scripts\login.ps1 openai
+```
+
+### Solo veo modelos de OpenAI
+
+Probablemente solo hiciste login con OpenAI. Ejecuta:
+
+```bash
+./scripts/login.sh anthropic
+```
+
+En Windows:
+
+```powershell
+.\scripts\login.ps1 anthropic
+```
+
+### El navegador no abre
+
+Usa modo sin navegador y copia manualmente la URL:
+
+```bash
+./scripts/login.sh anthropic --no-browser
+```
+
+En Windows:
+
+```powershell
+.\scripts\login.ps1 anthropic -NoBrowser
+```
+
+### Error 401 o credenciales invalidas
+
+Repite el login del proveedor:
+
+```bash
+./scripts/login.sh openai
+./scripts/login.sh anthropic
+```
+
+### El proxy no responde
+
+Arranca el proxy y dejalo corriendo:
+
+```bash
+./scripts/proxy-start.sh
+```
+
+### Windows bloquea scripts PowerShell
+
+Ejecuta el setup asi:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+```
 
 ---
 
 ## Seguridad
 
-- No compartas tu carpeta `~/.cli-proxy-api`: contiene tus tokens personales.
-- El `.gitignore` ya excluye binarios, credenciales y logs.
-- Cada alumno usa **su propia cuenta**; este proxy no comparte credenciales entre personas.
+- No compartas `~/.cli-proxy-api`: contiene tus tokens personales.
+- No subas tokens ni credenciales a GitHub.
+- Cada alumno debe iniciar sesion con su propia cuenta.
+- El proxy corre localmente en tu computadora.
+
+---
+
+## Reiniciar agentes
+
+Despues de instalar o cambiar `opencode.jsonc`, cierra y vuelve a abrir
+opencode. Las sesiones ya abiertas no recargan la configuracion automaticamente.
