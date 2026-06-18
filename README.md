@@ -1,16 +1,71 @@
 # opencode-proxy-alumnos
 
-Repo listo para que alumnos usen **opencode** y **droid** con los principales
-modelos de **OpenAI** y **Anthropic** usando **login web (OAuth)**.
+Repo listo para que alumnos usen **opencode** y **droid** con modelos de
+**OpenAI** y **Anthropic** usando **login web (OAuth)** -- sin API keys.
 
-No se usan API keys. Cada alumno inicia sesion con su propia cuenta en el
-navegador y los tokens quedan guardados solo en su computadora.
+---
 
-El proxy local corre en:
+## Instalacion directa (copy-paste)
 
-```text
-http://127.0.0.1:8317
+Abrir una terminal y pegar esto:
+
+### macOS / Ubuntu
+
+```bash
+# 1. Clonar y entrar
+git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
+cd opencode-proxy-alumnos
+
+# 2. Instalar el proxy (descarga binario + crea config)
+./scripts/setup.sh
+
+# 3. Iniciar sesion web (abre el navegador, inicia con tu cuenta)
+./scripts/login.sh openai      # modelos GPT
+./scripts/login.sh anthropic   # modelos Claude
+
+# 4. Instalar config del agente
+./scripts/install-opencode-config.sh   # para opencode
+./scripts/install-droid-config.sh      # para droid
+
+# 5. Arrancar el proxy (dejar esta terminal abierta)
+./scripts/proxy-start.sh
+
+# 6. En otra terminal, abrir el agente
+opencode
 ```
+
+### Windows (PowerShell)
+
+```powershell
+# 1. Clonar y entrar
+git clone https://github.com/Jcibernet/opencode-proxy-alumnos.git
+cd opencode-proxy-alumnos
+
+# 2. Instalar el proxy
+powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+
+# 3. Iniciar sesion web
+.\scripts\login.ps1 openai
+.\scripts\login.ps1 anthropic
+
+# 4. Instalar config del agente
+.\scripts\install-opencode-config.ps1
+.\scripts\install-droid-config.ps1
+
+# 5. Arrancar el proxy (dejar esta terminal abierta)
+.\scripts\proxy-start.ps1
+
+# 6. En otra terminal, abrir el agente
+opencode
+```
+
+> Una vez en opencode, escribi `/models` para elegir tu modelo.
+
+---
+
+## Guia de usuario
+
+Lee [`GUIA.md`](GUIA.md) para el uso diario: elegir modelo, effort, re-login, troubleshooting.
 
 ---
 
