@@ -19,3 +19,6 @@ logs/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# outputs de los casos de estudio
+casos/**/data/
