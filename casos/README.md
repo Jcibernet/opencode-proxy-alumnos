@@ -18,6 +18,7 @@ en el Notion del programa; acá se ve **directo en código**.
 | [10-convolucion-tokens](10-convolucion-tokens/) | Detector de bordes NumPy + mini-BPE | Redes convolucionales y tokens (Science) |
 | [11-cdn-headers](11-cdn-headers/) | Detective de CDN/cache/TLS por headers | CDN, Cloudflare y Resend (Engineering) |
 | [12-ml-clasico](12-ml-clasico/) | Churn con split honesto + K-means | ML supervisado y no supervisado (Science) |
+| [13-docker](13-docker/) | Postgres descartable + primera imagen | NAS, Docker y Kubernetes (Engineering) |
 
 ## Cómo correrlos
 
