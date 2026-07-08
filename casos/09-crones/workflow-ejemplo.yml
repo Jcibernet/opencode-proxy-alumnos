@@ -1,0 +1,18 @@
+# Ejemplo: el mismo pipeline como GitHub Actions programado.
+# Copiar a .github/workflows/ del proyecto real para activarlo.
+name: pipeline-diario
+on:
+  schedule:
+    - cron: "0 9 * * *"     # UTC: 09:00 UTC = 06:00 Argentina
+  workflow_dispatch:         # botón manual para backfills
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 casos/09-crones/caso.py
+      - name: dead-man switch
+        if: success()
+        run: echo "acá va: curl -fsS https://hc-ping.com/<uuid>"

@@ -14,6 +14,8 @@ en el Notion del programa; acá se ve **directo en código**.
 | [06-calculo-gradiente](06-calculo-gradiente/) | Descenso de gradiente desde cero | Cálculo (Science) |
 | [07-spark-local](07-spark-local/) | PySpark modo local | Spark (Engineering) |
 | [08-system-design](08-system-design/) | Banco de preguntas + flujo Excalidraw | System Design (Engineering) |
+| [09-crones](09-crones/) | Pipeline idempotente + lock + Actions schedule | Cron y scheduling (Herramientas) |
+| [10-convolucion-tokens](10-convolucion-tokens/) | Detector de bordes NumPy + mini-BPE | Redes convolucionales y tokens (Science) |
 
 ## Cómo correrlos
 
