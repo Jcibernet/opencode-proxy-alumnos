@@ -13,6 +13,7 @@ en el Notion del programa; acá se ve **directo en código**.
 | [05-estadistica-series](05-estadistica-series/) | TCL + series temporales | Estadística (Science) |
 | [06-calculo-gradiente](06-calculo-gradiente/) | Descenso de gradiente desde cero | Cálculo (Science) |
 | [07-spark-local](07-spark-local/) | PySpark modo local | Spark (Engineering) |
+| [08-system-design](08-system-design/) | Banco de preguntas + flujo Excalidraw | System Design (Engineering) |
 
 ## Cómo correrlos
 
