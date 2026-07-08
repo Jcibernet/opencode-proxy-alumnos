@@ -16,6 +16,7 @@ en el Notion del programa; acá se ve **directo en código**.
 | [08-system-design](08-system-design/) | Banco de preguntas + flujo Excalidraw | System Design (Engineering) |
 | [09-crones](09-crones/) | Pipeline idempotente + lock + Actions schedule | Cron y scheduling (Herramientas) |
 | [10-convolucion-tokens](10-convolucion-tokens/) | Detector de bordes NumPy + mini-BPE | Redes convolucionales y tokens (Science) |
+| [11-cdn-headers](11-cdn-headers/) | Detective de CDN/cache/TLS por headers | CDN, Cloudflare y Resend (Engineering) |
 
 ## Cómo correrlos
 
