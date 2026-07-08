@@ -5,6 +5,11 @@ Repo listo para que alumnos usen **opencode** y **droid** con modelos de
 
 ---
 
+## Que hay en este repo
+
+- **[casos/](./casos/)** — casos de estudio ejecutables, uno por tema del programa
+- **[skills/](./skills/)** — que es una skill, plantilla para escribir la tuya, y ejemplo real (git-flow)
+
 ## Instalacion directa (copy-paste)
 
 Abrir una terminal y pegar esto:
