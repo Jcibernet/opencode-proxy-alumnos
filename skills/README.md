@@ -28,9 +28,14 @@ El frontmatter necesita solo dos campos — y la `description` es la parte más
 importante: **es lo que el agente lee para decidir si la skill aplica** a la
 tarea que tiene enfrente. Escribila pensando en eso: qué hace + cuándo usarla.
 
-Mirá [`plantilla/SKILL.md`](./plantilla/SKILL.md) para arrancar la tuya y
+Mirá [`plantilla/SKILL.md`](./plantilla/SKILL.md) para arrancar la tuya,
 [`git-flow/SKILL.md`](./git-flow/SKILL.md) como ejemplo real completo (el
-flujo de ramas que usamos en el programa, escrito como skill).
+flujo de ramas que usamos en el programa, escrito como skill) y
+[`orquestacion-inteligente/SKILL.md`](./orquestacion-inteligente/SKILL.md) como
+ejemplo de "skill de criterio": no automatiza nada, enseña a formular el pedido.
+Esa última trae al lado
+[`economia-multiagente.md`](./orquestacion-inteligente/economia-multiagente.md),
+la medición que la respalda — el patrón de recurso pesado junto al `SKILL.md`.
 
 ## Dónde se instalan
 
