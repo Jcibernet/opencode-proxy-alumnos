@@ -11,9 +11,9 @@ pedido en vez del modelo.
 Una orden completa vale más que 300 pedidos sueltos. No es estilo: es la
 estructura del costo. Los números que lo respaldan están en
 [`economia-multiagente.md`](./economia-multiagente.md) — medición real sobre
-29.226 turnos y USD 5.011 de consumo.
+29.226 turnos en 50 sesiones.
 
-El resumen de esa medición en una línea: **el 71% del gasto es releer contexto,
+El resumen de esa medición en una línea: **el 71% del consumo es releer contexto,
 el 10% es producir la respuesta**.
 
 ## Pasos
@@ -35,8 +35,8 @@ el 10% es producir la respuesta**.
 
 3. **Mandá una sola orden que abra las independientes en paralelo.** Un subagente
    arranca con contexto vacío, trabaja chico y devuelve solo el resumen. En la
-   medición, los subagentes hicieron el **43% de los turnos por el 6,5% del costo**:
-   USD 0,026 por turno contra USD 0,281 del hilo principal.
+   medición, los subagentes hicieron el **43% de los turnos por el 6,5% del
+   consumo**: un turno de subagente sale 10,9× más barato que uno del principal.
 
 4. **No interrumpas hasta la verificación.** Cada confirmación a mitad es un turno
    que arrastra todo el contexto acumulado. Definí el criterio al principio y dejá
