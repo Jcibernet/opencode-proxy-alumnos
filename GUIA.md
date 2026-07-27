@@ -106,6 +106,98 @@ Se abre el navegador, inicias sesion y listo. Los tokens se guardan en `~/.cli-p
 
 ---
 
+## Como pedirle las cosas al agente
+
+Esta parte no es sobre el proxy: es sobre como usar el agente para que rinda.
+Cambia mas el resultado que elegir modelo.
+
+**Una orden completa vale mas que 300 pedidos sueltos.**
+
+### Por que
+
+Cada turno de una sesion reenvia el contexto acumulado. El turno N paga por todo
+lo que paso en los turnos 1 a N-1.
+
+```
+costo  ~  turnos x contexto_promedio
+            |              |
+       vos lo elegis   crece con los turnos
+```
+
+Los dos factores crecen juntos, asi que el costo es superlineal en la cantidad de
+turnos. Medicion real sobre 50 sesiones de trabajo:
+
+| turnos | output que produjo | contexto releido | ratio |
+|--------|--------------------|------------------|-------|
+| 2350   | 1.65M tokens       | 802M tokens      | 485:1 |
+| 2508   | 1.32M tokens       | 561M tokens      | 424:1 |
+| 1578   | 1.35M tokens       | 513M tokens      | 379:1 |
+| 1072   | 0.68M tokens       | 401M tokens      | 592:1 |
+
+Cuatro sesiones largas concentraron mas de la mitad del consumo total de las 50.
+
+Y el dato clave: **el ratio se mantiene igual sin importar que modelo corras**.
+Cambiar de modelo no mueve esto. Cambiar como pedis, si.
+
+### Las tres formas de trabajar
+
+**Peor: 300 pedidos independientes.** Cada pedido es un turno que arrastra todo lo
+anterior. Ademas pagas tres veces: reestablecer contexto, planificar con informacion
+parcial, y rehacer lo que el pedido 40 hizo distinto al 90.
+
+**Mejor: una orden completa.** El modelo planifica una vez contra informacion
+completa, ejecuta, y verifica.
+
+**Optimo: una orden completa que abre en paralelo.** El contexto de un subagente es
+descartable: arranca de cero, trabaja con contexto chico, y devuelve solo el resumen.
+Si el costo crece con el cuadrado de los turnos, repartir gana:
+
+```
+1 sesion  x 160 turnos  ->  160 x 160    = 25.600
+8 agentes x  20 turnos  ->  8 x 20 x 20  =  3.200
+```
+
+Ocho veces mas barato, y ademas terminan antes porque corren a la vez.
+
+### Que lleva una orden completa
+
+- **Objetivo**: que tiene que ser verdad cuando termine.
+- **Alcance**: archivos y funciones exactas. Y que NO tocar.
+- **Restricciones**: convenciones, librerias permitidas, patrones a seguir.
+- **Contratos**: si se reparte en paralelo, las interfaces se deciden ANTES.
+- **Criterio de aceptacion**: observable, no "que funcione".
+- **Verificacion**: el comando concreto que lo prueba.
+
+Lo que no esta en la orden, el modelo lo inventa. Y lo inventa distinto cada vez.
+
+### Anti-patrones
+
+- **Goteo**: "ahora hace X" repetido 300 veces. Cada gota cuesta el contexto entero.
+- **Un archivo por pedido**: si son 20 archivos independientes, es una orden con
+  reparto, no 20 pedidos.
+- **Ping-pong antes de arrancar**: cada aclaracion es un turno caro. Manda el brief
+  completo aunque te lleve mas escribirlo.
+- **Pedir confirmacion a mitad**: duplica los turnos y corta el hilo de razonamiento.
+- **Serializar lo que no depende**: si B no necesita la salida de A, van juntos.
+- **Sesion eterna**: seguir en el turno 2000 porque "ya tiene contexto". Ese contexto
+  es exactamente lo que estas pagando en cada turno.
+
+### Cuando cortar la sesion
+
+Cortar y arrancar de nuevo es la optimizacion mas grande y es gratis. Una sesion de
+2500 turnos cuesta varias veces una de 500 por el mismo trabajo.
+
+Corta cuando:
+
+- Cambiaste de tarea u objetivo.
+- El agente empieza a releer cosas que ya habia leido.
+- La tarea original ya esta terminada y verificada.
+
+> Regla corta: escribi el brief completo, identifica que partes son independientes,
+> deja que llegue hasta la verificacion sin interrumpir, y corta cuando termino.
+
+---
+
 ## Estructura de archivos
 
 ```
