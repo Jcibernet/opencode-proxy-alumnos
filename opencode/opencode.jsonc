@@ -39,6 +39,12 @@
         },
 
         // --- Anthropic (Claude) via web login OAuth ---
+        "claude-fable-5": {
+          "name": "Claude Fable 5",
+          "tool_call": true,
+          "reasoning": true,
+          "limit": { "context": 200000, "output": 32000 }
+        },
         "claude-opus-4-8": {
           "name": "Claude Opus 4.8",
           "tool_call": true,

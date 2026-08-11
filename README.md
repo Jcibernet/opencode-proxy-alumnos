@@ -152,6 +152,7 @@ Modelos:
 
 | Modelo | Uso recomendado |
 |---|---|
+| `claude-fable-5` | Claude mas nuevo, con razonamiento extendido |
 | `claude-opus-4-8` | Mejor Claude disponible en esta config |
 | `claude-opus-4-7` | Opus fuerte |
 | `claude-opus-4-6` | Opus fuerte |
